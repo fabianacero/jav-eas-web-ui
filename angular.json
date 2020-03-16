@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "version": 1, 
+  "version": 1,
   "newProjectRoot": "projects",
   "projects": {
     "jav-eas-web-ui": {
@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "jav-eas-web-ui"
+    }
+  },
+  "defaultProject": "jav-eas-web-ui",
+  "cli": {
+    "analytics": "34cb2e75-67e2-4bc5-9c7d-60b007496918"
+  }
 }

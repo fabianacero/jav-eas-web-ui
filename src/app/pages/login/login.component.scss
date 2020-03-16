@@ -1,0 +1,78 @@
+* {
+  font-size: 62.5%;
+  font-family: "Baloo 2";
+}
+
+.button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 0.5rem;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1.5rem;
+  margin: 4px 2px;
+  cursor: pointer;
+  height: 4rem;
+}
+
+button:disabled {
+  background-color: darkgrey;
+  cursor: not-allowed;
+}
+
+.login {
+  &__title {
+    text-align: center;
+    font-size: 2.5rem;
+    background-color: #05377b;
+    color: white;
+    height: 5rem;
+    line-height: 5rem;
+  }
+
+  &__form {
+    height: 30rem;
+    font-size: 1.6rem;
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+
+    .logo {
+      background-image: url("/assets/images/banco-de-bogota.png");
+      background-repeat: no-repeat;
+      background-size: 30rem;
+      height: 40rem;
+      width: 30rem;
+    }
+
+    & > form {
+      display: flex;
+      flex-direction: column;
+      min-width: 300px;
+      justify-content: center;
+
+      & > input {
+        width: 250px;
+        height: 40px;
+        margin-bottom: 2rem;
+        align-self: center;
+        font-size: 1.5rem;
+        padding: 0 0 0 1rem;
+      }
+
+    }
+  }
+
+  &__button {
+    width: 250px;
+    height: 25px;
+    display: flex;
+    justify-content: flex-end;
+    align-self: center;
+
+  }
+}
+
+

@@ -1,0 +1,13 @@
+<div class="login__title">CDT Digital - Banco de Bogotá</div>
+<div class="login__form">
+  <div class="logo"></div>
+  <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" class="form">
+    <input name="user" id="login-user" type="text" placeholder="Usuario" ngModel required>
+    <input name="password" id="login-password" type="password" placeholder="Clave" ngModel required>
+    <div class="login__button">
+      <button id="login-button" type="submit" class="button" [disabled]="!loginForm.valid">Ingresar</button>
+    </div>
+  </form>
+  <p>Form value: {{ loginForm.value | json }}</p>
+  <p>Form valid: {{ loginForm.valid }}</p>
+</div>
