@@ -1,12 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {
-  ZgwnuBonitaAuthenticationService, ZgwnuBonitaConfigService,
-  ZgwnuBonitaCredentials,
   ZgwnuBonitaErrorResponse,
   ZgwnuBonitaSession
-} from "@zgwnu/ng-bonita";
-import {Router} from "@angular/router";
+} from '@zgwnu/ng-bonita';
+import {Utilities} from 'src/app/utilities/utilities';
+import {Router} from '@angular/router';
+import {LoginService} from '../../provider/login.service';
+import {ServiceResponse} from "../../enums/service-response.enum";
 
 @Component({
   selector: 'app-login',
@@ -19,9 +20,9 @@ export class LoginComponent implements OnInit {
   private errorResponse: ZgwnuBonitaErrorResponse;
 
   constructor(
-    private authenticationService: ZgwnuBonitaAuthenticationService,
-    private configService: ZgwnuBonitaConfigService,
-    private router: Router) {
+    private router: Router,
+    private utilities: Utilities,
+    private login: LoginService) {
   }
 
   ngOnInit(): void {
@@ -31,21 +32,10 @@ export class LoginComponent implements OnInit {
     if (!loginForm.valid) {
       return false;
     }
-    this.authenticationService.login(new ZgwnuBonitaCredentials(loginForm.value.user, loginForm.value.password))
-      .subscribe(
-        session => {
-          this.session = session;
-          if (this.session) {
-            this.router.navigate(["/task"]);
-          }
-        },
-        errorResponse => {
-          console.log(errorResponse);
-          this.errorResponse = errorResponse;
-        },
-        () => {
-          console.log('configService', this.configService);
-        }
-      );
+    this.login.loginUser(loginForm, (response) => {
+      if (response.status === ServiceResponse.SUCESS) {
+        this.router.navigate(['/task']);
+      }
+    });
   }
 }
