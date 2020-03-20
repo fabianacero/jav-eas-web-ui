@@ -1,0 +1,57 @@
+* {
+  font-size: 62.5%;
+  font-family: "Baloo 2";
+}
+
+.header {
+  &__title {
+    background-color: #05377b;
+    background-image: url("src/assets/images/banco-de-bogota-header.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    border-radius: 0px 0px 8px 8px;
+    border: solid 1px gray;
+    color: black;
+    display: flex;
+    flex-direction: row;
+    height: 50px;
+    justify-content: space-between;
+    width: 100%;
+
+    .back-button {
+      background-color: transparent;
+      background-image: url("src/assets/images/arrow_back_ios-black-18dp.svg");
+    }
+
+    .close-button {
+      background-color: transparent;
+      background-image: url("src/assets/images/clear-black-18dp.svg");
+    }
+  }
+
+  &__button {
+    cursor: pointer;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 3.5rem;
+    width: 5rem;
+  }
+
+  &__empty {
+    flex: 80%;
+  }
+
+  &__info {
+    background-color: transparent;
+    & > div {
+      color: lightgray;
+      font-size: 1.4rem;
+      height: 5rem;
+      line-height: 5rem;
+      text-align: center;
+      width: 20rem;
+    }
+  }
+
+}

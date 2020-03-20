@@ -24,18 +24,18 @@ button:disabled {
 
 .login {
   &__title {
-    text-align: center;
-    font-size: 2.5rem;
     background-color: #05377b;
     color: white;
+    font-size: 2.5rem;
     height: 5rem;
     line-height: 5rem;
+    text-align: center;
   }
 
   &__form {
-    height: 30rem;
-    font-size: 1.6rem;
     display: flex;
+    font-size: 1.6rem;
+    height: 30rem;
     justify-content: center;
     margin-top: 2rem;
 
@@ -50,27 +50,27 @@ button:disabled {
     & > form {
       display: flex;
       flex-direction: column;
-      min-width: 300px;
       justify-content: center;
+      min-width: 300px;
 
       & > input {
-        width: 250px;
-        height: 40px;
-        margin-bottom: 2rem;
         align-self: center;
         font-size: 1.5rem;
+        height: 40px;
+        margin-bottom: 2rem;
         padding: 0 0 0 1rem;
+        width: 250px;
       }
 
     }
   }
 
   &__button {
-    width: 250px;
-    height: 25px;
-    display: flex;
-    justify-content: flex-end;
     align-self: center;
+    display: flex;
+    height: 25px;
+    justify-content: flex-end;
+    width: 250px;
 
   }
 }

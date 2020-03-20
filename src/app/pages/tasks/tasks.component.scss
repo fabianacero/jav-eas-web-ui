@@ -1,0 +1,99 @@
+* {
+  font-size: 62.5%;
+  font-family: "Baloo 2";
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px; /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+}
+
+.tasks {
+  &__container {
+    -webkit-box-shadow: -5px 5px 13px -3px rgba(0, 0, 0, 0.82);
+    border-radius: 0.2rem;
+    box-shadow: -5px 5px 13px -3px rgba(0, 0, 0, 0.82);
+    display: flex;
+    flex-direction: column;
+    height: 50rem;
+    margin: 0rem 1rem 0rem;
+  }
+
+  &__title {
+    margin-top: 1rem;
+    text-align: center;
+    font-size: 1.5rem;
+
+    & > span {
+      font-weight: bold;
+      font-size: 1.5rem;
+    }
+  }
+
+  &__cards {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    margin-top: 2rem;
+  }
+
+  &__card {
+    -webkit-box-shadow: -9px 7px 13px -6px rgba(0, 0, 0, 0.82);
+    background: #eaeff5;
+    border-radius: 0.5rem;
+    box-shadow: -9px 7px 13px -6px rgba(0, 0, 0, 0.82);
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    font-size: 1.5rem;
+    height: 5rem;
+    justify-content: space-between;
+    padding: 1rem;
+    width: 21rem;
+
+    & > div > div > span {
+      font-size: 1rem;
+      font-weight: bold;
+    }
+
+    & > div:first-of-type {
+      color: #03377b;
+      flex: 15%;
+    }
+
+    & > div:last-of-type {
+      flex: 85%;
+    }
+  }
+
+  &__card:hover {
+    background: #eaeff5;
+  }
+
+  &__card:active {
+    background-color: #eaeff5;
+    box-shadow: 0 2px #03377b;
+    transform: translateY(4px);
+  }
+
+}

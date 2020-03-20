@@ -1,0 +1,8 @@
+<div class="header__title">
+  <div *ngIf="showBackButton" class="header__button back-button"></div>
+  <div class="header__empty"></div>
+  <div class="header__info">
+    <div id="{{headerInfo.user_id}}">Bienvenido:  {{headerInfo.user_name}}</div>
+  </div>
+  <div *ngIf="showCloseButton" class="header__button close-button" (click)="closeSession();"></div>
+</div>

@@ -1,4 +1,17 @@
-<p>Here you will see your tasks!</p>
-<tr><th>user_id</th><th>= {{ session.user_id }}</th></tr>
-<tr><th>user_name</th><th>= {{ session.user_name }}</th></tr>
-<tr><th>token</th><th>= {{ session.token }}</th></tr>
+<app-header [showCloseButton]="true" [headerInfo]="session"></app-header>
+
+<div class="tasks__container">
+  <div class="tasks__title">Selecciona una tarea asignada a <span>{{session.user_name}}</span></div>
+
+  <div *ngIf="humanTask" class="tasks__cards">
+    <div class="tasks__card" (click)="getForm(humanTask.id);">
+      <div><i class="material-icons">&#xE87C;</i></div>
+      <div>
+        <div><span>Tipo de tarea:</span> {{humanTask.type}}</div>
+        <div><span>Nombre:</span> {{humanTask.displayName}}</div>
+        <div><span>Proceso:</span> {{humanTask.processId}}</div>
+      </div>
+    </div>
+  </div>
+</div>
+

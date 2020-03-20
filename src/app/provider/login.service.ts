@@ -4,7 +4,7 @@ import {
   ZgwnuBonitaCredentials
 } from '@zgwnu/ng-bonita';
 import {Utilities} from 'src/app/utilities/utilities';
-import {ServiceResponse} from "../enums/service-response.enum";
+import {ServiceResponse} from '../enums/service-response.enum';
 
 @Injectable({
   providedIn: 'root'
