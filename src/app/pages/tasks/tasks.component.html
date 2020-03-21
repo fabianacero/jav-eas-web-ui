@@ -3,14 +3,19 @@
 <div class="tasks__container">
   <div class="tasks__title">Selecciona una tarea asignada a <span>{{session.user_name}}</span></div>
 
-  <!--*ngFor="let item of items; let i = index"-->
+  <span class="tasks__subtitle">Tus procesos:</span>
+  <div *ngIf="userProcess" class="tasks__processes">
+    <div *ngFor="let userProcess of userProcess;" class="tasks__process">{{userProcess.displayName}}</div>
+  </div>
+
+  <span class="tasks__subtitle tasks__yourtask">Tus tareas:</span>
   <div *ngIf="humanTasks" class="tasks__cards">
     <div *ngFor="let humanTask of humanTasks;" class="tasks__card" (click)="getForm(humanTask.id);">
       <div><i class="material-icons">&#xE87C;</i></div>
       <div>
         <div><span>Tipo de tarea:</span> {{humanTask.type}}</div>
         <div><span>Nombre:</span> {{humanTask.displayName}}</div>
-        <div><span>Proceso:</span> {{humanTask.processId}}</div>
+        <div><span>Proceso:</span> {{processNames[humanTask.processId]}}</div>
       </div>
     </div>
   </div>

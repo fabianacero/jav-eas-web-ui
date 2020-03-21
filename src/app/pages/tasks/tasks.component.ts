@@ -1,8 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {
-  ZgwnuBonitaBpmHumanTaskService, ZgwnuBonitaConfigService,
-  ZgwnuBonitaErrorResponse, ZgwnuBonitaHumanTask, ZgwnuBonitaSearchParms,
-  ZgwnuBonitaSession, ZgwnuBonitaTask
+  ZgwnuBonitaBpmHumanTaskService, ZgwnuBonitaBpmProcessService,
+  ZgwnuBonitaConfigService,
+  ZgwnuBonitaErrorResponse,
+  ZgwnuBonitaHumanTask, ZgwnuBonitaProcessDefinition,
+  ZgwnuBonitaSearchParms,
+  ZgwnuBonitaSession,
 } from '@zgwnu/ng-bonita';
 import {Utilities} from '../../utilities/utilities';
 
@@ -16,20 +19,20 @@ export class TasksComponent implements OnInit {
   public session: ZgwnuBonitaSession;
   public errorResponse: ZgwnuBonitaErrorResponse;
   public humanTasks: ZgwnuBonitaHumanTask[];
+  public userProcess: ZgwnuBonitaProcessDefinition[];
+  public processNames = new Array();
 
   constructor(
     private bpmHumanTaskService: ZgwnuBonitaBpmHumanTaskService,
+    private bpmProcessService: ZgwnuBonitaBpmProcessService,
     private configService: ZgwnuBonitaConfigService,
     private utilities: Utilities) {
   }
 
   ngOnInit(): void {
     this.session = this.utilities.getFromSession('session');
+    this.searchProcess();
     this.searchTasks();
-  }
-
-  public getForm(taskId): void {
-    console.log("taskId, ", taskId);
   }
 
   /*private getAssignedTask() {
@@ -53,6 +56,22 @@ export class TasksComponent implements OnInit {
 
   }*/
 
+  private searchProcess() {
+    const searchParams: ZgwnuBonitaSearchParms = new ZgwnuBonitaSearchParms(0, 50);
+    searchParams.filters = [`user_id=${this.session.user_id}`, 'forPendingOrAssignedTask=true'];
+
+    this.bpmProcessService.searchProcessDefinitions(searchParams)
+      .subscribe(
+        processDefinitions => {
+          this.userProcess = processDefinitions;
+          this.userProcess.forEach(process => {
+            this.processNames[process.id] = process.displayName;
+          });
+        },
+        errorResponse => this.errorResponse = errorResponse
+      );
+  }
+
   private searchTasks() {
 
     const searchParams: ZgwnuBonitaSearchParms = new ZgwnuBonitaSearchParms(0, 50);
@@ -69,4 +88,7 @@ export class TasksComponent implements OnInit {
       );
   }
 
+  public getForm(taskId) {
+    console.log("taskId, ", taskId);
+  }
 }

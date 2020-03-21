@@ -52,8 +52,9 @@
 
   &__cards {
     display: flex;
-    justify-content: center;
     flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
     margin-top: 2rem;
   }
 
@@ -68,7 +69,7 @@
     font-size: 1.5rem;
     height: 5rem;
     justify-content: space-between;
-    margin-right: 3rem;
+    margin: 1.5rem 1.5rem 0rem 1.5rem;
     padding: 1rem;
     width: 21rem;
 
@@ -97,4 +98,19 @@
     transform: translateY(4px);
   }
 
+  &__subtitle {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0 0 0 3rem;
+  }
+
+  &__yourtask {
+    margin-top: 2rem;
+  }
+
+  &__process {
+    font-size: 1.2rem;
+    font-weight: normal;
+    margin: 0 0 0 4rem;
+  }
 }
