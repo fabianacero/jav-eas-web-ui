@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {
   ZgwnuBonitaBpmHumanTaskService, ZgwnuBonitaConfigService,
-  ZgwnuBonitaErrorResponse, ZgwnuBonitaSearchParms,
+  ZgwnuBonitaErrorResponse, ZgwnuBonitaHumanTask, ZgwnuBonitaSearchParms,
   ZgwnuBonitaSession, ZgwnuBonitaTask
 } from '@zgwnu/ng-bonita';
 import {Utilities} from '../../utilities/utilities';
@@ -15,7 +15,7 @@ export class TasksComponent implements OnInit {
   private readonly humanTaskName = 'USER_TASK';
   public session: ZgwnuBonitaSession;
   public errorResponse: ZgwnuBonitaErrorResponse;
-  public humanTask: ZgwnuBonitaTask;
+  public humanTasks: ZgwnuBonitaHumanTask[];
 
   constructor(
     private bpmHumanTaskService: ZgwnuBonitaBpmHumanTaskService,
@@ -54,7 +54,8 @@ export class TasksComponent implements OnInit {
   }*/
 
   private searchTasks() {
-    const searchParams: ZgwnuBonitaSearchParms = new ZgwnuBonitaSearchParms(0, 1);
+
+    const searchParams: ZgwnuBonitaSearchParms = new ZgwnuBonitaSearchParms(0, 50);
     searchParams.filters = [
       `user_id=${this.session.user_id}`
     ];
@@ -62,24 +63,10 @@ export class TasksComponent implements OnInit {
     this.bpmHumanTaskService.searchHumanTasks(searchParams)
       .subscribe(
         humanTasks => {
-          console.log('humanTask, ', humanTasks);
-          if (humanTasks && humanTasks[0]) {
-            this.humanTask = humanTasks[0];
-            this.getUserTask();
-          }
+          this.humanTasks = humanTasks;
         },
         errorResponse => this.errorResponse = errorResponse
       );
   }
 
-  private getUserTask() {
-    this.bpmHumanTaskService.getHumanTask(this.humanTask.id)
-      .subscribe(
-        humanTask => {
-          console.log("humanTask, ", humanTask);
-          this.humanTask = humanTask;
-        },
-        errorResponse => this.errorResponse
-      );
-  }
 }

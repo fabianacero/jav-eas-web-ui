@@ -3,8 +3,9 @@
 <div class="tasks__container">
   <div class="tasks__title">Selecciona una tarea asignada a <span>{{session.user_name}}</span></div>
 
-  <div *ngIf="humanTask" class="tasks__cards">
-    <div class="tasks__card" (click)="getForm(humanTask.id);">
+  <!--*ngFor="let item of items; let i = index"-->
+  <div *ngIf="humanTasks" class="tasks__cards">
+    <div *ngFor="let humanTask of humanTasks;" class="tasks__card" (click)="getForm(humanTask.id);">
       <div><i class="material-icons">&#xE87C;</i></div>
       <div>
         <div><span>Tipo de tarea:</span> {{humanTask.type}}</div>
