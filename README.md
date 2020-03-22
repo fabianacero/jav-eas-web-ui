@@ -1,10 +1,16 @@
-# JavEasWebUi
+# Frntend para BPMN Bonitasoft
+## JavEasWebUi
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.5.
 
-## Development server
+## Iniciar el proyecto
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Ejecutar el siguiente comando en la consola ubicado en la raíz del proyecto:
+ 
+```bash
+npm run start
+``` 
+Abra en el navegador la url `http://localhost:4200/`. podrá navegar por el proyecto.
 
 ## Code scaffolding
 

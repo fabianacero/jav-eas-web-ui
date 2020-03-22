@@ -33,6 +33,7 @@ export class LoginComponent implements OnInit {
       return false;
     }
     this.login.loginUser(loginForm, (response) => {
+      this.session = response;
       if (response.status === ServiceResponse.SUCESS) {
         this.router.navigate(['/task']);
       }

@@ -1,0 +1,10 @@
+.document {
+  &__form {
+    display: flex;
+    justify-content: center;
+    margin-top: 5rem;
+    & > form {
+      max-width: 30rem;
+    }
+  }
+}

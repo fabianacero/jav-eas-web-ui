@@ -1,13 +1,16 @@
 import {Component, OnInit} from '@angular/core';
 import {
-  ZgwnuBonitaBpmHumanTaskService, ZgwnuBonitaBpmProcessService,
+  ZgwnuBonitaBpmHumanTaskService, ZgwnuBonitaBpmProcessService, ZgwnuBonitaBpmTaskService,
   ZgwnuBonitaConfigService,
   ZgwnuBonitaErrorResponse,
   ZgwnuBonitaHumanTask, ZgwnuBonitaProcessDefinition,
   ZgwnuBonitaSearchParms,
-  ZgwnuBonitaSession,
+  ZgwnuBonitaSession, ZgwnuBonitaTask,
 } from '@zgwnu/ng-bonita';
 import {Utilities} from '../../utilities/utilities';
+import {HttpRequestService} from '../../provider/http-request/http-request.service';
+import {HttpMethod} from '../../enums/http-method.enum';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-tasks',
@@ -23,16 +26,20 @@ export class TasksComponent implements OnInit {
   public processNames = new Array();
 
   constructor(
+    private task: ZgwnuBonitaBpmTaskService,
     private bpmHumanTaskService: ZgwnuBonitaBpmHumanTaskService,
     private bpmProcessService: ZgwnuBonitaBpmProcessService,
     private configService: ZgwnuBonitaConfigService,
-    private utilities: Utilities) {
+    private httpRequest: HttpRequestService,
+    private utilities: Utilities,
+    private router: Router) {
   }
 
   ngOnInit(): void {
     this.session = this.utilities.getFromSession('session');
     this.searchProcess();
     this.searchTasks();
+    //this.getCaseVariable();
   }
 
   /*private getAssignedTask() {
@@ -58,7 +65,8 @@ export class TasksComponent implements OnInit {
 
   private searchProcess() {
     const searchParams: ZgwnuBonitaSearchParms = new ZgwnuBonitaSearchParms(0, 50);
-    searchParams.filters = [`user_id=${this.session.user_id}`, 'forPendingOrAssignedTask=true'];
+    searchParams.filters = [
+      `user_id=${this.session.user_id}`];
 
     this.bpmProcessService.searchProcessDefinitions(searchParams)
       .subscribe(
@@ -89,6 +97,8 @@ export class TasksComponent implements OnInit {
   }
 
   public getForm(taskId) {
-    console.log("taskId, ", taskId);
+    console.log('taskId, ', taskId);
+    this.router.navigate(['/document']);
   }
+
 }

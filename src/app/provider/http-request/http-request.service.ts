@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {map, retry, catchError, timeout} from 'rxjs/operators';
-import {HttpMethod} from "../../enums/http-method.enum";
+import {HttpMethod} from '../../enums/http-method.enum';
 
 const REQUEST_TIMEOUT = 30000;
 
@@ -16,7 +16,8 @@ export class HttpRequestService {
       'Access-Control-Allow-Headers': 'X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method',
       'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, DELETE',
       Allow: 'GET, POST, OPTIONS, PUT, DELETE'
-    })
+    }),
+    withCredentials: true
   };
 
   private observeAllResponse = {observe: 'response'};
@@ -24,7 +25,7 @@ export class HttpRequestService {
   constructor(private http: HttpClient) {
   }
 
-  request(url: string, params: any, method: string = HttpMethod.POST, aditionalOptions?: { additionalHeaders: { Cookie: string; "bonita.tenant": string; "X-Bonita-API-Token": string } }): Observable<any> {
+  request(url: string, params: any, method: string = HttpMethod.POST, aditionalOptions?: { additionalHeaders: { Cookie: string; 'bonita.tenant': string; 'X-Bonita-API-Token': string } }): Observable<any> {
     let options = {};
     const body = JSON.stringify(params);
     let result: Observable<any>;
@@ -47,7 +48,7 @@ export class HttpRequestService {
         options = {headers: newHeaders};
       } else {
         options = this.httpOptions;
-        //options = {...options, ...aditionalOptions};
+        // options = {...options, ...aditionalOptions};
       }
     }
 
@@ -55,7 +56,7 @@ export class HttpRequestService {
       result = this.http.post(url, body, options);
     }
     if (method === HttpMethod.GET) {
-      console.log("options, ", options)
+      console.log('options, ', options);
       result = this.http.get(url + this.listParams(params), options);
     }
     if (method === HttpMethod.PUT) {
@@ -77,7 +78,7 @@ export class HttpRequestService {
 
     if (aditionalHeaders) {
       const tempHeader = {...this.httpOptions.headers, ...aditionalHeaders};
-      finalHeaders = {headers: new HttpHeaders(tempHeader)};
+      finalHeaders = {headers: new HttpHeaders(tempHeader), withCredentials: true};
     }
 
     if (method === HttpMethod.POST) {
@@ -118,4 +119,4 @@ export class HttpRequestService {
       return Object.keys(data).map(key => `${key}=${encodeURIComponent(data[key])}`).join('&');
     }
   }
-}
+};

@@ -12,6 +12,7 @@ import {BonitaCaseService} from "./components/bonita-case/bonita-case-service";
 import {CommonModule} from "@angular/common";
 import {HttpRequestService} from "./provider/http-request/http-request.service";
 import { HeaderComponent } from './components/header/header.component';
+import { DocumentComponent } from './forms/document/document.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { HeaderComponent } from './components/header/header.component';
     LoginComponent,
     TasksComponent,
     BonitaCaseComponent,
-    HeaderComponent
+    HeaderComponent,
+    DocumentComponent
   ],
   imports: [
     CommonModule,
