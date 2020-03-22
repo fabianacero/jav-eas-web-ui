@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import {
+  ZgwnuBonitaSession
+} from '@zgwnu/ng-bonita';
+import {Utilities} from './utilities/utilities';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +11,14 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'jav-eas-web-ui';
+  public session: ZgwnuBonitaSession;
+
+  constructor(private utilities: Utilities) {
+    this.session = this.utilities.getFromSession('session');
+    console.log('this.session, ', this.session);
+  }
 }
+
+
+
+

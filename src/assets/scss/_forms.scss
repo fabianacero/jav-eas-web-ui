@@ -1,0 +1,72 @@
+* {
+  font-size: 62.5%;
+  font-family: "Baloo 2";
+}
+
+
+.forms {
+  &__container {
+    -webkit-box-shadow: -5px 5px 13px -3px rgba(0, 0, 0, 0.82);
+    border-radius: 0.2rem;
+    box-shadow: -5px 5px 13px -3px rgba(0, 0, 0, 0.82);
+    display: flex;
+    flex-direction: column;
+    min-height: 50rem;
+    margin: 0rem 1rem 0rem;
+  }
+
+  &__form {
+    margin: 5rem 0 6rem 0;
+    > form {
+      background: #dee2e859;
+      border-radius: 1rem;
+      border: solid 1px #dee2e8;
+      display: flex;
+      flex-direction: column;
+      margin: 0 auto;
+      max-width: 40rem;
+      padding: 4rem 4rem;
+      > input {
+        font-size: 1.2rem;
+        height: 3rem;
+        margin: 0.5rem 0;
+      }
+      > span {
+        font-size: 1.5rem;
+      }
+    }
+
+    &--inline {
+      display: flex;
+      justify-content: space-between;
+      > input {
+        font-size: 1.2rem;
+        height: 3rem;
+        margin: 0.5rem 0;
+        width: 100%;
+      }
+      > input:first-of-type{
+        margin-right: 0.25rem;
+      }
+      > input:last-of-type{
+        margin-left: 0.25rem;
+      }
+    }
+  }
+
+  &__button {
+    display: flex;
+    justify-content: center;
+    > button {
+      background-color: #03377b;
+      border-radius: 0.5rem;
+      color: white;
+      font-size: 1.2rem;
+      height: 3rem;
+    }
+    > button:disabled {
+      color: #ccc;
+      background-color: #dee2e8;
+    }
+  }
+}

@@ -1,0 +1,18 @@
+.footer {
+  background-color: #dee2e8;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  height: 50px;
+  justify-content: center;
+  margin: -5px 7rem 0;
+  padding: 1rem;
+  text-decoration: none;
+
+  > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 1.2rem;
+  }
+}

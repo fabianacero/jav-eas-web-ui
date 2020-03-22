@@ -1,0 +1,26 @@
+<app-header [showBackButton]="true" [showCloseButton]="true" [headerInfo]="session"></app-header>
+
+<div class="forms__container">
+  <div class="forms__form">
+    <form #savingsForm="ngForm" (ngSubmit)="onSubmit(savingsForm);" class="form">
+      <input name="savings[id]" id="id" type="number" placeholder="Request Id" ngModel readonly disabled>
+      <span>Información del solicitante</span>
+      <input name="savings[identification]" id="identification" type="number" placeholder="Identification" ngModel
+             required>
+      <div class="forms__form--inline">
+        <input name="savings[firstName]" id="firstName" type="text" placeholder="Nombre" ngModel>
+        <input name="savings[lastName]" id="lastName" type="text" placeholder="Apellido" ngModel>
+      </div>
+      <span>Información de la cuenta</span>
+      <input name="savings[balance]" id="balance" type="number" placeholder="Monto" ngModel>
+
+      <div class="forms__button">
+        <button id="savings-button" type="submit" class="button" [disabled]="!savingsForm.valid">
+          Solicitar Creación de Cuenta
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<app-footer></app-footer>

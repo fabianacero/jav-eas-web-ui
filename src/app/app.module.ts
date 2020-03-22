@@ -13,6 +13,10 @@ import {CommonModule} from "@angular/common";
 import {HttpRequestService} from "./provider/http-request/http-request.service";
 import { HeaderComponent } from './components/header/header.component';
 import { DocumentComponent } from './forms/document/document.component';
+import { RequestSavingsAccountComponent } from './forms/request-savings-account/request-savings-account.component';
+import { RequestCdtAccountComponent } from './forms/request-cdt-account/request-cdt-account.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { CreateCdtAccountComponent } from './forms/create-cdt-account/create-cdt-account.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +25,11 @@ import { DocumentComponent } from './forms/document/document.component';
     TasksComponent,
     BonitaCaseComponent,
     HeaderComponent,
-    DocumentComponent
+    DocumentComponent,
+    RequestSavingsAccountComponent,
+    RequestCdtAccountComponent,
+    FooterComponent,
+    CreateCdtAccountComponent
   ],
   imports: [
     CommonModule,

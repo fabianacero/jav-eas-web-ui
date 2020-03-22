@@ -1,10 +1,14 @@
 <app-header [showBackButton]="true" [showCloseButton]="true" [headerInfo]="session"></app-header>
 
-<div class="document__form">
-  <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" class="form">
-    <input name="document" id="document" type="text" placeholder="Document" ngModel required>
-    <div class="document__button">
-      <button id="document-button" type="submit" class="button" [disabled]="!loginForm.valid">Enviar Documento</button>
-    </div>
-  </form>
+<div class="forms__container">
+  <div class="forms__form">
+    <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" class="form">
+      <input name="document" id="document" type="text" placeholder="Document" ngModel required>
+      <div class="forms__button">
+        <button id="document-button" type="submit" class="button" [disabled]="!loginForm.valid">Enviar Documento</button>
+      </div>
+    </form>
+  </div>
 </div>
+
+<app-footer></app-footer>

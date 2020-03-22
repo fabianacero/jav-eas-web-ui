@@ -1,0 +1,37 @@
+<app-header [showBackButton]="true" [showCloseButton]="true" [headerInfo]="session"></app-header>
+
+<div class="forms__container">
+  <div class="forms__form">
+    <form #savingsForm="ngForm" (ngSubmit)="onSubmit(savingsForm);" class="form">
+      <span>Información del solicitante</span>
+      <input name="cdt[identification]" id="identification" type="number" placeholder="Identification" ngModel
+             required>
+      <div class="forms__form--inline">
+        <input name="cdt[firstName]" id="firstName" type="text" placeholder="Nombre" ngModel>
+        <input name="cdt[lastName]" id="lastName" type="text" placeholder="Apellido" ngModel>
+      </div>
+
+      <span>Cuenta de donde se tomarán los recursos</span>
+      <input name="cdt[account]" id="account" type="number" placeholder="Número de Cuenta" ngModel>
+      <input name="cdt[balance]" id="balance" type="number" placeholder="Monto" ngModel>
+
+      <span>Condiciones del CDT</span>
+      <input name="cdt[cdt]" id="cdt" type="number" placeholder="Número de CDT" ngModel>
+      <input name="cdt[amount]" id="amount" type="number" placeholder="Monto a invertir" ngModel>
+
+      <input name="cdt[term]" id="term" type="number" placeholder="Plazo (Días)" ngModel
+             required>
+
+      <input name="cdt[rate]" id="rate" type="number" placeholder="Taza" ngModel
+             required>
+
+      <div class="forms__button">
+        <button id="savings-button" type="submit" class="button" [disabled]="!savingsForm.valid">
+          Realizar Inversión
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<app-footer></app-footer>

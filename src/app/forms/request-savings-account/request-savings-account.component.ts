@@ -1,14 +1,14 @@
 import {Component, OnInit} from '@angular/core';
-import {NgForm} from "@angular/forms";
 import {ZgwnuBonitaSession} from "@zgwnu/ng-bonita";
 import {Utilities} from "../../utilities/utilities";
+import {NgForm} from "@angular/forms";
 
 @Component({
-  selector: 'app-document',
-  templateUrl: './document.component.html',
-  styleUrls: ['./document.component.scss']
+  selector: 'app-request-savings-account',
+  templateUrl: './request-savings-account.component.html',
+  styleUrls: ['./request-savings-account.component.scss']
 })
-export class DocumentComponent implements OnInit {
+export class RequestSavingsAccountComponent implements OnInit {
 
   public session: ZgwnuBonitaSession;
 
@@ -26,5 +26,4 @@ export class DocumentComponent implements OnInit {
     const docuement = form.value.document;
     console.log("form, ", form)
   }
-
 }

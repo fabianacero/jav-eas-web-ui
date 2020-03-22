@@ -1,0 +1,27 @@
+<app-header [showBackButton]="true" [showCloseButton]="true" [headerInfo]="session"></app-header>
+
+<div class=forms__container>
+  <div class="forms__form">
+    <form #cdtForm="ngForm" (ngSubmit)="onSubmit(cdtForm);" class="form">
+      <input name="cdt[amount]" id="amount" type="number" placeholder="Monto a invertir" ngModel>
+
+      <input name="cdt[term]" id="term" type="number" placeholder="Plazo (Días)" ngModel
+             required>
+
+      <input *ngIf="showRate" name="cdt[rate]" id="rate" type="number" placeholder="Taza" ngModel
+             required>
+
+      <div class="forms__form--terms">
+        <input *ngIf="showRate" name="cdt[terms]" id="terms" type="checkbox" ngModel required><div>Aceptar Condiciones</div>
+      </div>
+
+      <div class="forms__button">
+        <button id="cdt-button" type="submit" class="button" [disabled]="!cdtForm.valid">
+          Solicitar Creación de CDT
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<app-footer></app-footer>
