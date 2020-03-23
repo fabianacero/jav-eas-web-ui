@@ -4,13 +4,12 @@ import {
   ZgwnuBonitaConfigService,
   ZgwnuBonitaErrorResponse,
   ZgwnuBonitaHumanTask, ZgwnuBonitaProcessDefinition,
-  ZgwnuBonitaSearchParms,
-  ZgwnuBonitaSession, ZgwnuBonitaTask,
+  ZgwnuBonitaSearchParms
 } from '@zgwnu/ng-bonita';
 import {Utilities} from '../../utilities/utilities';
 import {HttpRequestService} from '../../provider/http-request/http-request.service';
+import {BonitaSession} from '../../models/bonita-session';
 import {HttpMethod} from '../../enums/http-method.enum';
-import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-tasks',
@@ -18,11 +17,10 @@ import {Router} from '@angular/router';
   styleUrls: ['./tasks.component.scss']
 })
 export class TasksComponent implements OnInit {
-  private readonly humanTaskName = 'USER_TASK';
-  public session: ZgwnuBonitaSession;
+  public session: BonitaSession;
   public errorResponse: ZgwnuBonitaErrorResponse;
   public humanTasks: ZgwnuBonitaHumanTask[];
-  public userProcess: ZgwnuBonitaProcessDefinition[];
+  public userProcess = new Array();
   public processNames = new Array();
 
   constructor(
@@ -31,57 +29,60 @@ export class TasksComponent implements OnInit {
     private bpmProcessService: ZgwnuBonitaBpmProcessService,
     private configService: ZgwnuBonitaConfigService,
     private httpRequest: HttpRequestService,
-    private utilities: Utilities,
-    private router: Router) {
+    private utilities: Utilities) {
   }
 
   ngOnInit(): void {
     this.session = this.utilities.getFromSession('session');
-    this.searchProcess();
-    this.searchTasks();
-    //this.getCaseVariable();
+    Object.entries(this.session.processInfo).forEach(([key, value]) => {
+      this.userProcess.push(value);
+    });
+    Object.entries(this.session.processNames).forEach(([key, value]) => {
+      this.processNames[key] = value;
+    });
+    this.setDocumentOnProcess(() => {
+      this.searchTasks();
+    });
   }
 
-  /*private getAssignedTask() {
-    const endpoint = '/bonita/API/bpm/humanTask';
-    const headers = {
-      additionalHeaders: {
-        'X-Bonita-API-Token': '806f410d-d052-4074-84ab-85412afc958a',
-        'Cookie': 'JSESSIONID=7790E3A6B67D4F6A06B871DD1A6B910A',
-        'bonita.tenant': '1'
-      }
-    };
+  private setDocumentOnProcess(callback) {
+    const processInfo = this.session.processInfo;
+    const identificationNumber = this.session.customeInfo.IdentificationNumber;
+    const processIds = Object.keys(this.session.processNames);
+    const currentProcessId = processIds[0];
+    let currentCase = null;
+    let promise = null;
+    if (currentProcessId && processInfo[currentProcessId]) {
+      currentCase = processInfo[currentProcessId].currentCase;
+      currentCase = currentCase[0];
+    }
+    if (currentCase) {
+      promise = new Promise((resolve, reject) => {
+        this.setProcessVariable(currentCase.id, identificationNumber, (status) => {
+          resolve(status);
+        });
+      });
+    }
+
+    promise.then((final) => {
+      return typeof callback === 'function' ? callback() : callback;
+    }).catch(reason => console.error('promise failed, ', reason));
+  }
+
+  private setProcessVariable(caseId: number, value: any, callback): void {
+    const endpoint = `/bonita/API/bpm/caseVariable/${caseId}/identificationNumber`;
     const params = {
-      p: '0',
-      c: '10',
-      f: 'state=ready&user_id=4'
+      type: 'java.lang.String',
+      value
     };
-
-    this.httpRequest.request(endpoint, params, HttpMethod.GET, headers).subscribe((response) => {
-      console.log('response, ', response);
+    this.httpRequest.request(endpoint, params, HttpMethod.PUT, {
+      additionalHeaders: {'X-Bonita-API-Token': this.session.token}
+    }).subscribe((response) => {
+      return typeof callback === 'function' ? callback(response) : response;
     });
-
-  }*/
-
-  private searchProcess() {
-    const searchParams: ZgwnuBonitaSearchParms = new ZgwnuBonitaSearchParms(0, 50);
-    searchParams.filters = [
-      `user_id=${this.session.user_id}`];
-
-    this.bpmProcessService.searchProcessDefinitions(searchParams)
-      .subscribe(
-        processDefinitions => {
-          this.userProcess = processDefinitions;
-          this.userProcess.forEach(process => {
-            this.processNames[process.id] = process.displayName;
-          });
-        },
-        errorResponse => this.errorResponse = errorResponse
-      );
   }
 
   private searchTasks() {
-
     const searchParams: ZgwnuBonitaSearchParms = new ZgwnuBonitaSearchParms(0, 50);
     searchParams.filters = [
       `user_id=${this.session.user_id}`
@@ -96,9 +97,8 @@ export class TasksComponent implements OnInit {
       );
   }
 
-  public getForm(taskId) {
-    console.log('taskId, ', taskId);
-    this.router.navigate(['/document']);
+  public takeTask(userId, taskId) {
+    console.log("userId, ", userId, taskId);
   }
 
 }

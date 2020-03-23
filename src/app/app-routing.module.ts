@@ -7,11 +7,13 @@ import {DocumentComponent} from "./forms/document/document.component";
 import {RequestSavingsAccountComponent} from "./forms/request-savings-account/request-savings-account.component";
 import {RequestCdtAccountComponent} from "./forms/request-cdt-account/request-cdt-account.component";
 import {CreateCdtAccountComponent} from "./forms/create-cdt-account/create-cdt-account.component";
+import {StartComponent} from "./pages/start/start.component";
 
 
 const routes: Routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full'},
   {path: 'login', component: LoginComponent, canActivate: [AuthGuard]},
+  {path: 'start', component: StartComponent},
   {path: 'task', component: TasksComponent},
   {path: 'document', component: DocumentComponent},
   {path: 'request-saving', component: RequestSavingsAccountComponent},

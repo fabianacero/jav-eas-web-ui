@@ -33,14 +33,4 @@ export class HeaderComponent implements OnInit {
   public goBack(): void {
     this._location.back();
   }
-
-  // get variable http://localhost:8080/bonita/API/bpm/activityVariable/20029/identificationNumber
-  // update variable http://localhost:8080/bonita/API/bpm/caseVariable/1008/identificationNumber
-  private getCaseVariable(taskId: number): void {
-    const endpoint = `/bonita/API/bpm/activityVariable/${taskId}/identificationNumber`;
-    const params = {};
-    this.httpRequest.request(endpoint, params, HttpMethod.GET).subscribe((response) => {
-      console.log('response, ', response);
-    });
-  }
 }

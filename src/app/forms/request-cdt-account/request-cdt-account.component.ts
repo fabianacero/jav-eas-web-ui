@@ -11,7 +11,7 @@ import {NgForm} from '@angular/forms';
 export class RequestCdtAccountComponent implements OnInit {
 
   public session: ZgwnuBonitaSession;
-  public showRate = true;
+  public showRate = false;
 
   constructor(private utilities: Utilities) {
   }

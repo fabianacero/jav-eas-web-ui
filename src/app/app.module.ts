@@ -17,6 +17,7 @@ import { RequestSavingsAccountComponent } from './forms/request-savings-account/
 import { RequestCdtAccountComponent } from './forms/request-cdt-account/request-cdt-account.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { CreateCdtAccountComponent } from './forms/create-cdt-account/create-cdt-account.component';
+import { StartComponent } from './pages/start/start.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { CreateCdtAccountComponent } from './forms/create-cdt-account/create-cdt
     RequestSavingsAccountComponent,
     RequestCdtAccountComponent,
     FooterComponent,
-    CreateCdtAccountComponent
+    CreateCdtAccountComponent,
+    StartComponent
   ],
   imports: [
     CommonModule,

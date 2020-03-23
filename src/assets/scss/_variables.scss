@@ -1,0 +1,190 @@
+//  ********************
+//  **** BREAK POINTS  ****
+//  ********************
+
+$breakpoint-desktop: 1200px;
+$breakpoint-tablet: 768px;
+$breakpoint-mobile: 320px;
+$breakpoint-mobile-samsung-g5: 360px;
+$breakpoint-mobile-iphone-6to8: 375px;
+$breakpoint-mobile-iphone-6to8plus: 414px;
+
+
+// BreakPoints Width - Landscape tablets Small - Medium - Big
+$break-small: 600px;
+//Tablet Pequeña landscape
+$break-small-ld: 960px;
+//Tablet Mediana Vertical
+$break-medium: 700px;
+//Tablet Mediana landscape
+$break-medium-ld: 1000px;
+//Tablet Grande Vertical
+$break-big: 800px;
+//Tablet Grande Landscape
+$break-big-ld: 1200px;
+//Desktop
+$break-desk: 1200px;
+// Breaks Height - Landscape tablets Small - Medium - Big
+$desktop-size: 1000px;
+$mini-desktop-size: 900px;
+$tablet-size: 800px;
+$small-tablet-key-with-board: 700px;
+$tablet-size-small-Keyboard: 785px;
+$tablet-size-with-keyboard: 741px;
+/*Break Points*/
+$maxWidthDesktop: 1140px;
+// Nuevas Variables Height
+$big-tablet:1160px;
+$big-tablet-keyboard: 770px;
+$big-tablet-big-Keyboard: 750px;
+$medium-tablet:900px;
+$medium-tablet-keyboard: 580px;
+$small-tablet:790px;
+$small-tablet-keyboard: 480px;
+
+// ********************
+// **** COLORS ****
+// ********************
+
+$white: #ffffff;
+$black: #000000;
+
+//paleta primaria
+$Azul-BdB: #002C76;
+$Amarillo-BdB: #FDC130;
+$Rojo-BdB: #D0021B;
+$Verde-BdB: #7AD468;
+
+// paleta secudaria
+$Azul-2-BdB: #0040A8;
+$Azul-3-BdB: #4070BE;
+$Azul-4-BdB: #0085E0;
+$Azul-5-BdB: #C4D4E3;
+$Amarillo-2-BdB: #EDA705;
+$Rojo-2-BdB: #E33031;
+$Grey-1-BdB: #4A4A4A;
+$Grey-2-BdB: #9B9B9B;
+$Grey-3-BdB: #BEC1C6;
+$Grey-4-BdB: #E6E6E6;
+$Grey-5-BdB: #EFEFEF;
+$Grey-6-Bdb: #CCCCCC;
+$Grey-7-Bdb: #333333;
+$Grey-8-Bdb: #999999;
+$Grey-10-Bdb: #666666;
+$Grey-11-Bdb: #5c5c5c;
+$Grey-bg: #F9F9F9;
+$BG-BdB: #F6F8FA;
+$bg-download: #DCE5EE;
+$mango : #f69b31;
+$cobalt: #0040a8;
+$science: #0074d3;
+$white: #ffffff;
+$aqua:#f6f8fa;
+$horizon: #6680ad;
+$pastel-green: #7ad468;
+$boticelli: #c4d4e3;
+$carbon: #333333;
+$midnight: #002c76;
+$sunglow: #fdc130;
+$mercury: #cccccc;
+$dusty: #999999;
+$silver: #f2f2f2;
+$carbon: #333333;
+$dove: #666666;
+
+
+
+// ********************
+// **** MIXIN ****
+// ********************
+
+@mixin title-animated ($animation-name: example,
+                        $animation-duration:1s,
+                         $top:24%,
+                         $color: red,
+                         $width: auto,
+                         $text-align: start,
+                         $font-weight: normal,
+                         $margin-left: 0){
+  -webkit-animation-duration: $animation-duration;
+  -webkit-animation-fill-mode: forwards;
+  -webkit-animation-name:$animation-name;
+  -webkit-animation-timing-function: cubic-bezier(0.1, 1, 0.1, 1);
+  color: $color;
+  font-family: DTLArgoT;
+  font-size: 3.2rem;
+  font-stretch: normal;
+  font-style: normal;
+  font-weight: $font-weight;
+  left:100%;
+  letter-spacing: -0.8px;
+  line-height: 1.5;
+  margin-left: $margin-left;
+  position: relative;
+  text-align: $text-align;
+  top:$top;
+  width: $width;
+  @media (min-width: $breakpoint-mobile){
+    font-size: 3.2rem;
+    line-height: 1;
+    height: 4rem;
+  }
+  @media (min-width: $break-medium){
+    font-size: 4rem;
+    line-height: 1;
+    height: 4.5rem;
+  }
+  @media (min-width: $break-desk){
+    line-height: 1;
+    height: 5rem;
+  }
+}
+
+@mixin text-paragraph (){
+  color: #333333;
+  font-family: Roboto-Light;
+  font-size: 16px;
+  font-stretch: normal;
+  font-style: normal;
+  font-weight: 300;
+  letter-spacing: normal;
+  line-height: 1.5;
+  margin:auto;
+  text-align: justify;
+  width: 92%;
+}
+@mixin question-carbon-regular($fontSize){
+  font-family: -apple-system;
+  font-family:'-apple-system','Roboto-Regular';
+  font-size: $fontSize;
+  color: $carbon;
+}
+@mixin row($rotate, $color){
+  border-left: 3px solid #0040a8;
+  border-top: 3px solid #0040a8;
+  width: 14px;
+  height: 14px;
+  transform: rotate($rotate);
+}
+@mixin desription-dove-regular($fontSize){
+  font-family: Roboto-Light;
+  font-size: $fontSize;
+  color: $dove;
+}
+@mixin label-dove-light($fontSize){
+  font-family: OpenSans-Light;
+  font-size: $fontSize;
+  color: $dove;
+}
+@mixin label-cobalt-dtlargot($fontSize){
+  font-family: DTLArgoT;
+  font-size: $fontSize;
+  color: $cobalt;
+
+}
+
+@keyframes arrowmove {
+  0%  {top: 0;}
+  50% {top: 1rem;}
+  100%{top: 0rem;}
+}

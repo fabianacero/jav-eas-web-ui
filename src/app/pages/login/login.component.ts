@@ -1,13 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {NgForm} from '@angular/forms';
-import {
-  ZgwnuBonitaErrorResponse,
-  ZgwnuBonitaSession
-} from '@zgwnu/ng-bonita';
 import {Utilities} from 'src/app/utilities/utilities';
 import {Router} from '@angular/router';
 import {LoginService} from '../../provider/login.service';
-import {ServiceResponse} from "../../enums/service-response.enum";
+import {ServiceResponse} from '../../enums/service-response.enum';
 
 @Component({
   selector: 'app-login',
@@ -15,9 +11,6 @@ import {ServiceResponse} from "../../enums/service-response.enum";
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-
-  private session: ZgwnuBonitaSession;
-  private errorResponse: ZgwnuBonitaErrorResponse;
 
   constructor(
     private router: Router,
@@ -32,10 +25,9 @@ export class LoginComponent implements OnInit {
     if (!loginForm.valid) {
       return false;
     }
-    this.login.loginUser(loginForm, (response) => {
-      this.session = response;
+    this.login.loginUser(loginForm, (response: any) => {
       if (response.status === ServiceResponse.SUCESS) {
-        this.router.navigate(['/task']);
+        this.router.navigate(['/start']);
       }
     });
   }

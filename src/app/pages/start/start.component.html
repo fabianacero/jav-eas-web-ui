@@ -1,0 +1,52 @@
+<app-header [showCloseButton]="true" [headerInfo]="session"></app-header>
+<div class="start__container">
+  <div class="forms__container">
+
+    <div class="ctn-banner__title-animated">
+      <div class="ctn-banner__title-animated__line-one">
+        <div class="title-c">C</div>
+        <div class="title-c-complement">omienza</div>
+        <div class="title-c-complement-two">tu</div>
+      </div>
+      <div class="ctn-banner__title-animated__line-two">
+        <div class="title-d">D</div>
+        <div class="title-d-complement">esafío</div>
+        <div class="title-d-complement-two">de</div>
+      </div>
+      <div class="ctn-banner__title-animated__line-three">
+        <div class="title-t">T</div>
+        <div class="title-t-complement">ransformación</div>
+        <div class="title-t-complement-two">financiera</div>
+      </div>
+      <div class="ctn-banner__title-animated__line-four">
+        <div class="title-t-complement-two">financiera</div>
+      </div>
+    </div>
+    <div class="ctn-banner__ctn-cdt-description">
+      <div class="ctn-banner__ctn-cdt-description__cdt-description">
+        <spam class="ctn-banner__ctn-cdt-description__cdt-description__text">
+          Invierte tu dinero a un plazo fijo y gana intereses sin correr ningún riesgo.
+          <spam class="ctn-banner__ctn-cdt-description__cdt-description__push-text">
+            Abre hoy tu CDT desde $100.000 pesos
+          </spam>
+          en 3 simples pasos.
+        </spam>
+      </div>
+    </div>
+
+    <div class="forms__form">
+      <form #startForm="ngForm" (ngSubmit)="onSubmit(startForm);" class="form">
+        <div class="forms__form--terms">
+          <input name="start[conditions]" id="conditions" type="checkbox" ngModel required>
+          <div><a
+            href="https://www.bancodebogota.com/wps/portal/banco-de-bogota/bogota/productos/para-ti/tasas-y-tarifas" target="_blank">Acepta
+            Términos y Condiciones</a></div>
+        </div>
+        <div class="button__container">
+          <button [disabled]="!startForm.valid" class="start__button">Comienza Aqui tu CDT Digital</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>
