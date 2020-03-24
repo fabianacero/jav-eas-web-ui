@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {
-  ZgwnuBonitaAuthenticationService, ZgwnuBonitaBpmProcessService, ZgwnuBonitaConfigService,
-  ZgwnuBonitaCredentials, ZgwnuBonitaSearchParms, ZgwnuBonitaSession
+  ZgwnuBonitaAuthenticationService, ZgwnuBonitaConfigService,
+  ZgwnuBonitaCredentials
 } from '@zgwnu/ng-bonita';
 import {Utilities} from 'src/app/utilities/utilities';
 import {ServiceResponse} from '../enums/service-response.enum';
@@ -14,20 +14,21 @@ import {HttpRequestService} from './http-request/http-request.service';
 })
 export class LoginService {
 
+  private bonitaSession: BonitaSession;
   constructor(
     private configService: ZgwnuBonitaConfigService,
     private authenticationService: ZgwnuBonitaAuthenticationService,
     private httpRequest: HttpRequestService,
-    private utilities: Utilities,
-    private bpmProcessService: ZgwnuBonitaBpmProcessService) {
+    private utilities: Utilities) {
   }
 
   public loginUser(loginForm, callback): any {
     this.authenticationService.login(new ZgwnuBonitaCredentials(loginForm.value.user, loginForm.value.password))
       .subscribe(
-        (session: ZgwnuBonitaSession) => {
-          this.getUserCustomInfo(session, (customeInfo) => {
-            const customeSession: BonitaSession = new BonitaSession(session, customeInfo);
+        (session: BonitaSession) => {
+          this.bonitaSession = session;
+          this.getUserCustomInfo( (customeInfo) => {
+            const customeSession: BonitaSession = new BonitaSession(this.bonitaSession, customeInfo);
             this.utilities.saveOnSession('session', customeSession);
             return typeof callback === 'function' ? callback({
               status: ServiceResponse.SUCESS,
@@ -51,8 +52,8 @@ export class LoginService {
     return this.utilities.getFromSession('session') !== null;
   }
 
-  private getUserCustomInfo(session: ZgwnuBonitaSession, callback) {
-    const endpoint = `/bonita/API/customuserinfo/user?c=10&p=0&f=userId=${session.user_id}`;
+  private getUserCustomInfo(callback) {
+    const endpoint = `/bonita/API/customuserinfo/user?c=10&p=0&f=userId=${this.bonitaSession.user_id}`;
     const customInfo = new Array();
     const params = {};
 
@@ -61,58 +62,38 @@ export class LoginService {
         customInformation.forEach((customField) => {
           customInfo[customField.definitionId.name] = customField.value;
         });
-        this.getCurrentProcess(session, (processData) => {
-          session.processNames = processData.processNames;
-          session.processInfo = processData.processInfo;
-          console.log("session, ", session)
+
+        this.getCurrentProcess((processData) => {
+          if (processData) {
+            this.bonitaSession.processNames = processData.processNames;
+            this.bonitaSession.processInfo = processData.processInfo;
+          }
           callback(Object.assign({}, customInfo));
         });
       });
   }
 
-  private getCurrentProcess(session, callback) {
-    const searchParams: ZgwnuBonitaSearchParms = new ZgwnuBonitaSearchParms(0, 50);
-    let result = {};
-    searchParams.filters = [`user_id=${session.user_id}`];
-
-    this.bpmProcessService.searchProcessDefinitions(searchParams)
-      .subscribe(
-        processDefinitions => {
-          let processNames: Array<any> = new Array<any>();
-          let processInfo: Array<any> = new Array<any>();
-          let promise = null;
-          promise = new Promise((resolve, reject) => {
-            processDefinitions.forEach(process => {
-              this.getCurrentCase(process.id, (currentCase) => {
-                process.currentCase = currentCase;
-                processInfo[process.id] = process;
-                processNames[process.id] = process.displayName;
-                resolve(currentCase);
-              });
-            });
-          });
-
-          promise.then((final) => {
-            processNames = Object.assign({}, processNames);
-            processInfo = Object.assign({}, processInfo);
-            console.log("processInfo, ", processInfo);
-            result = {processNames, processInfo};
-            return typeof callback === 'function' ? callback(result) : result;
-          }).catch((reason) => {
-            console.error('promise rejected', reason);
-          });
-        },
-        errorResponse => console.error(errorResponse)
-      );
-  }
-
-  private getCurrentCase(processId, callback): any {
-    const endpoint = `/bonita/API/bpm/case?p=0&c=10&f=processDefinitionId=${processId}`;
-    const params = {};
-
-    this.httpRequest.request(endpoint, params, HttpMethod.GET).subscribe(
-      (currentCaseInfo) => {
-        return typeof callback === 'function' ? callback(currentCaseInfo) : currentCaseInfo;
+  private getCurrentProcess(callback) {
+    let endpoint = `bonita/API/bpm/humanTask?c=50&f=state%3Dready&f=user_id%3D${this.bonitaSession.user_id}&p=0`;
+    let processNames: Array<any> = new Array<any>();
+    let processInfo: Array<any> = new Array<any>();
+    sessionStorage.removeItem("begin");
+    this.httpRequest.request(endpoint, {}, HttpMethod.GET)
+      .subscribe((task) => {
+        let result = {processNames: {}, processInfo: {}};
+        if (!task || !task.length) {
+          return typeof callback === 'function' ? callback(result) : result;
+        }
+        this.utilities.saveOnSession("begin", task);
+        endpoint = `/bonita/API/bpm/process/${task[0].processId}`;
+        this.httpRequest.request(endpoint, {}, HttpMethod.GET).subscribe((process) => {
+          processNames[process.id] = process.displayName;
+          processInfo[process.id] = process;
+          processNames = Object.assign({}, processNames);
+          processInfo = Object.assign({}, processInfo);
+          result = {processNames, processInfo};
+          return typeof callback === 'function' ? callback(result) : result;
+        });
       });
   }
 }

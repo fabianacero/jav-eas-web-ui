@@ -13,7 +13,27 @@
       }
       > div {
         line-height: 3rem;
+        font-size: 1.2rem;
       }
     }
+  }
+  &__percentage {
+    color: #04387b;
+    display: flex;
+    font-size: 2.5rem;
+    font-weight: bold;
+    justify-content: space-around;
+    margin: 2rem;
+  }
+  &__subtitle {
+    color: #04387b;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  &__warning {
+    color: #aba9a9;
+    font-size: 1rem;
+    margin-top: 1rem;
   }
 }

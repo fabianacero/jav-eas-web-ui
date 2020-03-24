@@ -1,18 +1,28 @@
 <app-header [showBackButton]="true" [showCloseButton]="true" [headerInfo]="session"></app-header>
 
 <div class=forms__container>
+  <div class="forms__title">{{task.displayName}}</div>
   <div class="forms__form">
-    <form #cdtForm="ngForm" (ngSubmit)="onSubmit(cdtForm);" class="form">
-      <input name="cdt[amount]" id="amount" type="number" placeholder="Monto a invertir" ngModel>
+    <form #cdtForm="ngForm" (ngSubmit)="onSubmit(cdtForm)" class="form">
+      <div class="forms__subtitle">Descripción de tu inversión*</div>
+      <input name="amount" id="amount" type="number" class="form-control"
+             placeholder="Monto a invertir" [(ngModel)]="model.amount"
+             [readOnly]="acceptCdt" >
 
-      <input name="cdt[term]" id="term" type="number" placeholder="Plazo (Días)" ngModel
-             required>
+      <input name="term" id="term" type="number" placeholder="Plazo (Días)"
+             [(ngModel)]="model.term" [readOnly]="acceptCdt" required>
 
-      <input *ngIf="showRate" name="cdt[rate]" id="rate" type="number" placeholder="Taza" ngModel
-             required>
+      <input *ngIf="acceptCdt" name="rate" id="rate" type="hidden" placeholder="Taza"
+             [(ngModel)]="model.rate" readonly required>
+
+      <div *ngIf="acceptCdt" class="forms__percentage">
+        <span>Tasa fija E.A</span>
+        <span>{{model.rate_string}}<span>%</span></span>
+      </div>
 
       <div class="forms__form--terms">
-        <input *ngIf="showRate" name="cdt[terms]" id="terms" type="checkbox" ngModel required><div>Aceptar Condiciones</div>
+        <input *ngIf="acceptCdt" name="accept" id="accept" type="checkbox" [(ngModel)]="model.accept" >
+        <div>Aceptas las condiciones para solicitar la creación del CDT - Digital</div>
       </div>
 
       <div class="forms__button">
@@ -20,8 +30,11 @@
           Solicitar Creación de CDT
         </button>
       </div>
+      <div class="forms__warning">*Los valores descritos son una aproximación y no representan una oferta comercial definitiva por parte del Banco de Bogotá.</div>
     </form>
   </div>
 </div>
+<pre>{{ this.model | json }}</pre>
+<pre>{{ cdtForm.value | json }}</pre>
 
 <app-footer></app-footer>

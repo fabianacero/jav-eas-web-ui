@@ -7,13 +7,13 @@
   }
 
   &__button {
-    background: linear-gradient(to bottom, #77d42a 5%, #5cb811 100%);
-    background-color: #77d42a;
+    background: linear-gradient(to bottom, #fdc130 5%, #e0a800 100%);
+    background-color: #fdc130;
     border-radius: 8px;
-    border: 2px solid #268a16;
+    border: 1px solid #e3ae2d;
     display: inline-block;
     cursor: pointer;
-    color: #306108;
+    color: #916700;
     font-family: "Baloo 2";
     font-size: 19px;
     font-weight: bold;
@@ -22,8 +22,8 @@
   }
 
   &__button:hover {
-    background: linear-gradient(to bottom, #5cb811 5%, #77d42a 100%);
-    background-color: #5cb811;
+    background: linear-gradient(to bottom, #FFEB3B 5%, #FFC107 100%);
+    background-color: #FFC107;
   }
 
   &__button:active {

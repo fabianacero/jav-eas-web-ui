@@ -14,7 +14,7 @@ export class Utilities {
     return btoa(JSON.stringify(item));
   }
 
-  decodeJsonElement(item, objectToMap) {
+  decodeJsonElement(item, objectToMap?) {
     if (!item) {
       return objectToMap;
     }
