@@ -1,18 +1,22 @@
 <app-header [showBackButton]="true" [showCloseButton]="true" [headerInfo]="session"></app-header>
 
 <div class="forms__container">
+  <div class="forms__title">{{task.displayName}}</div>
   <div class="forms__form">
     <form #savingsForm="ngForm" (ngSubmit)="onSubmit(savingsForm);" class="form">
-      <input name="savings[id]" id="id" type="number" placeholder="Request Id" ngModel readonly disabled>
+      <input name="id" id="id" type="number" placeholder="Request Id"
+             [(ngModel)]="model.savingId" readonly>
       <span>Información del solicitante</span>
-      <input name="savings[identification]" id="identification" type="number" placeholder="Identification" ngModel
-             required>
+      <input name="identification" id="identification" type="number" placeholder="Identification"
+             [(ngModel)]="model.identificationNumber" required>
       <div class="forms__form--inline">
-        <input name="savings[firstName]" id="firstName" type="text" placeholder="Nombre" ngModel>
-        <input name="savings[lastName]" id="lastName" type="text" placeholder="Apellido" ngModel>
+        <input name="firstName" id="firstName" type="text" placeholder="Nombre"
+               [(ngModel)]="model.firstName">
+        <input name="lastName" id="lastName" type="text" placeholder="Apellido"
+               [(ngModel)]="model.lastName">
       </div>
       <span>Información de la cuenta</span>
-      <input name="savings[balance]" id="balance" type="number" placeholder="Monto" ngModel>
+      <input name="balance" id="balance" type="number" placeholder="Monto" ngModel required>
 
       <div class="forms__button">
         <button id="savings-button" type="submit" class="button" [disabled]="!savingsForm.valid">

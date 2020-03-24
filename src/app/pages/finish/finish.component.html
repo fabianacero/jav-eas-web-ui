@@ -2,12 +2,15 @@
 <div class="finish__container">
   <div class="finish__title">¡Tu CDT digital ha sido creado exitosamente!</div>
   <div class="forms__container">
-
       <div class="finish__subtitle">Tu CDT digital</div>
       <div class="finish__box">
         <div class="finish__box--stamp"></div>
-        <span>Al vencimiento de tu CDT consignaremos en tu cuenta:</span>
-        <span>$2.067.200</span>
+        <span>Tu CDT Digital se ha creado exitosamente con un saldo inicial:</span>
+        <span>${{amount}}</span>
+      </div>
+
+      <div class="finish__button">
+        <button (click)="closeSession();">Finalizar</button>
       </div>
   </div>
 </div>

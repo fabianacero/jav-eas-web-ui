@@ -8,6 +8,7 @@ import {ServiceResponse} from '../enums/service-response.enum';
 import {BonitaSession} from '../models/bonita-session';
 import {HttpMethod} from '../enums/http-method.enum';
 import {HttpRequestService} from './http-request/http-request.service';
+import {TasksNames} from "../enums/tasks-names.enum";
 
 @Injectable({
   providedIn: 'root'
@@ -43,7 +44,7 @@ export class LoginService {
           }) : errorResponse;
         },
         () => {
-          console.log('configService', this.configService);
+          console.info('configService', this.configService);
         }
       );
   }
@@ -77,14 +78,14 @@ export class LoginService {
     let endpoint = `bonita/API/bpm/humanTask?c=50&f=state%3Dready&f=user_id%3D${this.bonitaSession.user_id}&p=0`;
     let processNames: Array<any> = new Array<any>();
     let processInfo: Array<any> = new Array<any>();
-    sessionStorage.removeItem("begin");
+    sessionStorage.removeItem(TasksNames.BEGIN);
     this.httpRequest.request(endpoint, {}, HttpMethod.GET)
       .subscribe((task) => {
         let result = {processNames: {}, processInfo: {}};
         if (!task || !task.length) {
           return typeof callback === 'function' ? callback(result) : result;
         }
-        this.utilities.saveOnSession("begin", task);
+        this.utilities.saveOnSession(TasksNames.BEGIN, task);
         endpoint = `/bonita/API/bpm/process/${task[0].processId}`;
         this.httpRequest.request(endpoint, {}, HttpMethod.GET).subscribe((process) => {
           processNames[process.id] = process.displayName;

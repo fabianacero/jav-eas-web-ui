@@ -60,31 +60,33 @@
 
   &__card {
     -webkit-box-shadow: -9px 7px 13px -6px rgba(0, 0, 0, 0.82);
-    background: #eaeff5;
+    background: #f4f4f4;
     border-radius: 0.5rem;
     box-shadow: -9px 7px 13px -6px rgba(0, 0, 0, 0.82);
     cursor: pointer;
     display: flex;
     flex-direction: row;
-    font-size: 1.5rem;
-    min-height: 5rem;
+    font-size: 2rem;
     justify-content: space-between;
-    margin: 1.5rem 1.5rem 0rem 1.5rem;
+    margin: 1.5rem;
+    min-height: 7rem;
     padding: 1rem;
-    width: 21rem;
+    width: 30rem;
 
     & > div > div > span {
-      font-size: 1rem;
-      font-weight: bold;
+      color: #03387b;
+      font-size: 1.2rem;
+      font-weight: 600;
     }
 
     & > div:first-of-type {
       color: #03377b;
-      flex: 15%;
+      flex: 10%;
     }
 
     & > div:last-of-type {
-      flex: 85%;
+      flex: 83%;
+      font-size: 1.9rem;
     }
   }
 

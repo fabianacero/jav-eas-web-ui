@@ -4,13 +4,24 @@
   <div class="forms__title">{{task.displayName}}</div>
   <div class="forms__form">
     <form #cdtForm="ngForm" (ngSubmit)="onSubmit(cdtForm)" class="form">
-      <div class="forms__subtitle">Descripción de tu inversión*</div>
-      <input name="amount" id="amount" type="number" class="form-control"
+      <div *ngIf="acceptCdt" class="forms__subtitle">Descripción de tu inversión*</div>
+      <div *ngIf="!acceptCdt" class="forms__subtitle">Ingresa tu inversión*</div>
+      <input [class.hide]="acceptCdt" name="amount" id="amount" type="number" class="form-control"
              placeholder="Monto a invertir" [(ngModel)]="model.amount"
-             [readOnly]="acceptCdt" >
+             [readOnly]="acceptCdt">
 
-      <input name="term" id="term" type="number" placeholder="Plazo (Días)"
+      <div *ngIf="acceptCdt" class="forms__info">
+        <span>Monto a invertir</span>
+        <span><span>$</span>{{model.amount}}</span>
+      </div>
+
+      <input [class.hide]="acceptCdt" name="term" id="term" type="number" placeholder="Plazo (Días)"
              [(ngModel)]="model.term" [readOnly]="acceptCdt" required>
+
+      <div *ngIf="acceptCdt" class="forms__info">
+        <span>Plazo</span>
+        <span>{{model.term}}<span> Días</span></span>
+      </div>
 
       <input *ngIf="acceptCdt" name="rate" id="rate" type="hidden" placeholder="Taza"
              [(ngModel)]="model.rate" readonly required>
@@ -21,20 +32,23 @@
       </div>
 
       <div class="forms__form--terms">
-        <input *ngIf="acceptCdt" name="accept" id="accept" type="checkbox" [(ngModel)]="model.accept" >
+        <input *ngIf="acceptCdt" name="accept" id="accept" type="checkbox" [(ngModel)]="model.accept">
         <div>Aceptas las condiciones para solicitar la creación del CDT - Digital</div>
       </div>
 
-      <div class="forms__button">
+      <div class="forms__button" [class.forms__button--accept]="model.accept">
         <button id="cdt-button" type="submit" class="button" [disabled]="!cdtForm.valid">
-          Solicitar Creación de CDT
+          <span *ngIf="!model.accept">Rechazar Creación de CDT</span>
+          <span *ngIf="model.accept">Solicitar Creación de CDT</span>
         </button>
       </div>
-      <div class="forms__warning">*Los valores descritos son una aproximación y no representan una oferta comercial definitiva por parte del Banco de Bogotá.</div>
+      <div class="forms__warning">*Los valores descritos son una aproximación y no representan una oferta comercial
+        definitiva por parte del Banco de Bogotá.
+      </div>
     </form>
   </div>
 </div>
-<pre>{{ this.model | json }}</pre>
-<pre>{{ cdtForm.value | json }}</pre>
+<!--<pre>{{ this.model | json }}</pre>
+<pre>{{ cdtForm.value | json }}</pre>-->
 
 <app-footer></app-footer>

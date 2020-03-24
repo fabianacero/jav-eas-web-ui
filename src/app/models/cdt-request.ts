@@ -13,4 +13,5 @@ export class CdtRequest {
   public identificationNumber: number;
   public productType: number;
   public cdtId: number;
+  public continue: boolean;
 }

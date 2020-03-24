@@ -15,7 +15,6 @@ export class AppComponent {
 
   constructor(private utilities: Utilities) {
     this.session = this.utilities.getFromSession('session');
-    console.log('this.session, ', this.session);
   }
 }
 

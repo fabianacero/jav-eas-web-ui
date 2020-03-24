@@ -10,6 +10,7 @@ import {StartComponent} from "./pages/start/start.component";
 import {AuthGuard} from "./guards/auth/auth.guard";
 import {TaskGuard} from "./guards/tasks/task.guard";
 import {FinishComponent} from "./pages/finish/finish.component";
+import {ContactClientComponent} from "./forms/contact-client/contact-client.component";
 
 
 const routes: Routes = [
@@ -21,6 +22,7 @@ const routes: Routes = [
   {path: 'request-saving/:task', component: RequestSavingsAccountComponent},
   {path: 'request-cdt/:task', component: RequestCdtAccountComponent},
   {path: 'create-cdt/:task', component: CreateCdtAccountComponent},
+  {path: 'contact-client/:task', component: ContactClientComponent},
   {path: 'finish', component: FinishComponent}
 ];
 

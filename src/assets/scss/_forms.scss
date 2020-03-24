@@ -5,6 +5,23 @@
 
 
 .forms {
+
+  &__label {
+    color: #04387b;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-top: 1rem;
+  }
+
+  &__info {
+    color: #04387b;
+    display: flex;
+    font-size: 2.5rem;
+    font-weight: 500;
+    justify-content: space-between;
+    margin: 0.6rem;
+  }
+
   &__container {
     -webkit-box-shadow: -5px 5px 13px -3px rgba(0, 0, 0, 0.82);
     border-radius: 0.2rem;
@@ -25,6 +42,7 @@
 
   &__form {
     margin: 5rem 0 6rem 0;
+
     > form {
       background: #dee2e859;
       border-radius: 1rem;
@@ -34,11 +52,21 @@
       margin: 0 auto;
       max-width: 40rem;
       padding: 4rem 4rem;
+
       > input {
         font-size: 1.2rem;
         height: 3rem;
         margin: 0.5rem 0;
+
+        &.hide {
+          border: 0;
+          height: 0rem;
+          margin: 0;
+          padding: 0;
+          visibility: hidden;
+        }
       }
+
       > span {
         font-size: 1.5rem;
       }
@@ -47,17 +75,32 @@
     &--inline {
       display: flex;
       justify-content: space-between;
+
       > input {
         font-size: 1.2rem;
         height: 3rem;
         margin: 0.5rem 0;
         width: 100%;
       }
-      > input:first-of-type{
+
+      > input:first-of-type {
         margin-right: 0.25rem;
       }
-      > input:last-of-type{
+
+      > input:last-of-type {
         margin-left: 0.25rem;
+      }
+    }
+
+    &--input {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+
+      > input {
+        font-size: 1.2rem;
+        height: 3rem;
+        margin: 0.5rem 0;
       }
     }
   }
@@ -65,6 +108,7 @@
   &__button {
     display: flex;
     justify-content: center;
+
     > button {
       background-color: #03377b;
       border-radius: 0.5rem;
@@ -72,6 +116,7 @@
       font-size: 1.2rem;
       height: 3rem;
     }
+
     > button:disabled {
       color: #ccc;
       background-color: #dee2e8;

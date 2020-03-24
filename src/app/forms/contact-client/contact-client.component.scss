@@ -1,0 +1,33 @@
+@import 'src/assets/scss/_forms.scss';
+
+.forms {
+  &__form {
+    &--terms {
+      display: flex;
+      flex-direction: row;
+      height: 3rem;
+      justify-content: center;
+      margin: 2rem 0;
+
+      > input {
+        height: 3rem;
+        margin: 0;
+        width: 3rem;
+      }
+
+      > div {
+        line-height: 3rem;
+        font-size: 1.2rem;
+      }
+    }
+  }
+  &__button > button {
+    background-color: #fdc130;
+    border-radius: 0.5rem;
+    color: #333;
+    font-size: 1.2rem;
+    height: 5rem;
+    padding: 0 4rem;
+  }
+}
+

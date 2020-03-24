@@ -1,39 +1,66 @@
 @import 'src/assets/scss/_forms.scss';
 
 .forms {
-  &__form{
-    &--terms{
+
+  &__button {
+    > button {
+      background-color: #dee2e9;
+      color: #333;
+      height: 4rem;
+      padding: 0.5rem 4rem;
+
+      & > span {
+        font-size: 1.2rem;
+      }
+    }
+
+    &--accept > button {
+      background-color: #04387b;
+      color: #fff;
+    }
+  }
+
+  &__form {
+    &--terms {
       display: flex;
       flex-direction: row;
       height: 3rem;
       justify-content: center;
+
       > input {
-        height: 2rem;
-        margin: 0.4rem 1rem 0 0;
+        height: 3rem;
+        margin: 0;
+        width: 3rem;
       }
+
       > div {
         line-height: 3rem;
         font-size: 1.2rem;
       }
     }
   }
+
   &__percentage {
-    color: #04387b;
+    color: #FF9800;
     display: flex;
-    font-size: 2.5rem;
+    font-size: 3.5rem;
     font-weight: bold;
-    justify-content: space-around;
-    margin: 2rem;
+    justify-content: space-evenly;
+    margin: 0rem;
   }
+
   &__subtitle {
     color: #04387b;
     font-size: 1.8rem;
     margin-bottom: 1rem;
     text-align: center;
   }
+
   &__warning {
     color: #aba9a9;
     font-size: 1rem;
     margin-top: 1rem;
   }
 }
+
+

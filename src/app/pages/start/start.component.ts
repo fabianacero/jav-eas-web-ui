@@ -6,6 +6,7 @@ import {Utilities} from '../../utilities/utilities';
 import {Router} from '@angular/router';
 import {NgForm} from "@angular/forms";
 import {ZgwnuBonitaBpmHumanTaskService, ZgwnuBonitaHumanTask, ZgwnuBonitaSearchParms} from "@zgwnu/ng-bonita";
+import {TasksNames} from "../../enums/tasks-names.enum";
 
 @Component({
   selector: 'app-start',
@@ -50,6 +51,7 @@ export class StartComponent implements OnInit {
       additionalHeaders: {'X-Bonita-API-Token': this.session.token}
     }).subscribe((response) => {
       this.executeTask(taskId, (execution) => {
+        sessionStorage.removeItem(TasksNames.BEGIN);
         setTimeout(() => { // Temporal test
           this.router.navigate(['/task']);
         }, 2000);

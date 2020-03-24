@@ -23,8 +23,6 @@ export class DocumentComponent implements OnInit {
     if (!form.valid) {
       return false;
     }
-    const docuement = form.value.document;
-    console.log("form, ", form)
   }
 
 }

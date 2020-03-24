@@ -37,9 +37,12 @@ export class RequestCdtAccountComponent implements OnInit {
 
     if (this.task.name === TasksNames.ACCEPT_CDT_FORM) {
       this.acceptCdt = true;
-      this.businessDataService.getBusunessData('CDTConditions', (cdtConditions) => {
-        this.model = this.utilities.recursiveAssign(new CdtRequest(), cdtConditions);
-        this.model.accept = false;
+      const caseId = this.task.rootCaseId;
+      this.businessDataService.getStorageId(caseId, "cdtConditions", (storageId) => {
+        this.businessDataService.getBusunessBonitaData('CDTConditions', storageId,null, (cdtConditions) => {
+          this.model = this.utilities.recursiveAssign(new CdtRequest(), cdtConditions);
+          this.model.accept = false;
+        });
       });
     }
   }

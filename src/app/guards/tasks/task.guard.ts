@@ -14,7 +14,7 @@ export class TaskGuard implements CanActivate {
   }
 
   canActivate() {
-    const fistTask = this.utilities.getFromSession("begin");
+    const fistTask = this.utilities.getFromSession(TasksNames.BEGIN);
     if (fistTask && fistTask[0]) {
       if (fistTask[0].name === TasksNames.LOGIN_TASK) {
         return true;

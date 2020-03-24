@@ -35,23 +35,32 @@ export class CreateCdtAccountComponent implements OnInit {
     });
     const sessionRequest = this.utilities.getFromSession('request');
     this.model = this.utilities.recursiveAssign(new CdtRequest(), sessionRequest);
-    this.businessDataService.getBusunessData('Product', (product) => {
-      this.model.accountNumber = product.accountNumber;
-      this.model.balance = product.balance;
-    });
-    this.businessDataService.getBusunessData('Customer', (customer) => {
-      this.model.firstName = customer.firstName;
-      this.model.lastName = customer.lastName;
-    });
-    this.businessDataService.getBusunessData('identificationCustomer', (identification) => {
-      this.model.identificationNumber = identification.identificationNumber;
-    });
-    this.businessDataService.getBusunessData('RequestProduct', (requestProduct) => {
-      this.model.productType = requestProduct.productType;
-      this.model.cdtId = requestProduct.id;
+
+    const caseId = this.task.rootCaseId;
+    this.businessDataService.getStorageId(caseId, "savingAccount", (storageId) => {
+      this.businessDataService.getBusunessBonitaData("Product", storageId, null, (savingAccount) => {
+        this.model.accountNumber = savingAccount.accountNumber;
+        this.model.balance = savingAccount.balance;
+      });
+
+      this.businessDataService.getBusunessBonitaData("Product", storageId, "identification", (identification) => {
+        this.model.identificationNumber = identification.identificationNumber;
+      });
     });
 
+    this.businessDataService.getStorageId(caseId, "customerDTo", (storageId) => {
+      this.businessDataService.getBusunessBonitaData('Customer', storageId, null, (customer) => {
+        this.model.firstName = customer.firstName;
+        this.model.lastName = customer.lastName;
+      });
+    });
 
+    this.businessDataService.getStorageId(caseId, "cdtAccountRequest", (storageId) => {
+      this.businessDataService.getBusunessBonitaData('RequestProduct', storageId, null, (requestProduct) => {
+        this.model.productType = requestProduct.productType;
+        this.model.cdtId = requestProduct.id;
+      });
+    });
   }
 
   onSubmit(form: NgForm) {
@@ -71,7 +80,8 @@ export class CreateCdtAccountComponent implements OnInit {
           firstName: form.value.firstName,
           lastName: form.value.lastName,
           identificationCustomer: {
-            identificationNumber: form.value.identification
+            identificationNumber: form.value.identification,
+            persistenceId_string: '126'
           }
         },
         cdtConditionsInput: {

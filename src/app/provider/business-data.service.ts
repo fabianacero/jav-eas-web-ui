@@ -11,28 +11,19 @@ export class BusinessDataService {
   constructor(private httpRequest: HttpRequestService) {
   }
 
-  public getBusunessData(businessData, callback?) {
-    let businessDataName = `com.company.model.${businessData}`;
-    switch (businessData) {
-      case 'CDTConditions':
-        businessDataName += '/14';
-        break;
-      case 'Product':
-        businessDataName += '/21';
-        break;
-      case 'Customer':
-        businessDataName += '/24';
-        break;
-      case 'identificationCustomer':
-        businessDataName = `com.company.model.Customer/24/identificationCustomer`;
-        break;
-      case 'RequestProduct':
-        businessDataName += '/14';
-        break;
-    }
+  public getStorageId(caseId, dataName, callback) {
+    const endpoint = `/bonita/API/bdm/businessDataReference/${caseId}/${dataName}`;
+    this.httpRequest.request(endpoint, {}, HttpMethod.GET)
+      .subscribe((storageData) => {
+        return typeof callback === 'function' ? callback(storageData.storageId) : storageData.storageId;
+      });
+  }
 
-    const endpoint = `/bonita/API/bdm/businessData/${businessDataName}`;
-    console.log("enpoint, ", endpoint);
+  public getBusunessBonitaData(dataName, storageId, resource?, callback?) {
+    let endpoint = `/bonita/API/bdm/businessData/com.company.model.${dataName}/${storageId}`;
+    if (resource) {
+      endpoint += `/${resource}`;
+    }
     this.httpRequest.request(endpoint, {}, HttpMethod.GET)
       .subscribe((response) => {
         return typeof callback === 'function' ? callback(response) : '';

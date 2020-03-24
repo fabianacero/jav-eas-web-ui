@@ -1,0 +1,66 @@
+<app-header [showBackButton]="true" [showCloseButton]="true" [headerInfo]="session"></app-header>
+
+<div class="forms__container">
+  <div class="forms__title">{{task.displayName}}</div>
+  <div class="forms__form">
+    <form #savingsForm="ngForm" (ngSubmit)="onSubmit(savingsForm);" class="form">
+      <span>Información del solicitante</span>
+
+      <label for="identification" class="forms__label">Identificación</label>
+      <input name="identification" id="identification" type="number" placeholder="Identification"
+             [(ngModel)]="model.identificationNumber" readonly required>
+      <div class="forms__form--inline">
+        <div class="forms__form--input">
+          <label for="firstName" class="forms__label">Nombre</label>
+          <input name="firstName" id="firstName" type="text" placeholder="Nombre"
+                 [(ngModel)]="model.firstName" readonly>
+        </div>
+        <div class="forms__form--input">
+          <label for="lastName" class="forms__label">Apellido</label>
+          <input name="lastName" id="lastName" type="text" placeholder="Apellido"
+                 [(ngModel)]="model.lastName" readonly>
+        </div>
+      </div>
+      <label for="email" class="forms__label">Email</label>
+      <input name="email" id="email" type="text" placeholder="Email"
+             [(ngModel)]="model.email" readonly required>
+
+      <span>Condiciones del CDT</span>
+      <input name="amount" id="amount" type="hidden" placeholder="Monto a invertir"
+             readonly [(ngModel)]="model.amount">
+      <div class="forms__info">
+        <span>Monto a Invertir</span>
+        <span>{{model.amount}}</span>
+      </div>
+
+      <input name="term" id="term" type="hidden" placeholder="Plazo (Días)"
+             [(ngModel)]="model.term" readonly required>
+      <div class="forms__info">
+        <span>Plazo (Días)</span>
+        <span>{{model.term}}</span>
+      </div>
+
+
+      <input name="rate" id="rate" type="hidden" placeholder="Taza"
+             [(ngModel)]="model.rate" readonly required>
+
+      <div class="forms__info">
+        <span>Taza</span>
+        <span>{{model.rate}}</span>
+      </div>
+
+      <div class="forms__form--terms">
+        <input name="continue" id="continue" type="checkbox" [(ngModel)]="model.continue">
+        <div>¿El cliente desea continuar con el proceso de CDT - Digital?</div>
+      </div>
+
+      <div class="forms__button">
+        <button id="savings-button" type="submit" class="button" [disabled]="!savingsForm.valid">
+          Finalizar contacto con el cliente
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<app-footer></app-footer>

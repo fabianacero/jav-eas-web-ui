@@ -19,6 +19,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { CreateCdtAccountComponent } from './forms/create-cdt-account/create-cdt-account.component';
 import { StartComponent } from './pages/start/start.component';
 import { FinishComponent } from './pages/finish/finish.component';
+import { ContactClientComponent } from './forms/contact-client/contact-client.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { FinishComponent } from './pages/finish/finish.component';
     FooterComponent,
     CreateCdtAccountComponent,
     StartComponent,
-    FinishComponent
+    FinishComponent,
+    ContactClientComponent
   ],
   imports: [
     CommonModule,

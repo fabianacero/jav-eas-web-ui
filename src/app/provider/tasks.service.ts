@@ -46,7 +46,6 @@ export class TasksService {
   public executeTask(params, taskId, callback) {
     const endpoint = `/bonita/API/bpm/userTask/${taskId}/execution`;
     const requestParams = {
-      ticket_comment: 'User execution',
       ...params
     };
     this.httpRequest.request(endpoint, requestParams, HttpMethod.POST, {

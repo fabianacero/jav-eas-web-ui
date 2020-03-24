@@ -56,7 +56,6 @@ export class HttpRequestService {
       result = this.http.post(url, body, options);
     }
     if (method === HttpMethod.GET) {
-      console.log('options, ', options);
       result = this.http.get(url + this.listParams(params), options);
     }
     if (method === HttpMethod.PUT) {

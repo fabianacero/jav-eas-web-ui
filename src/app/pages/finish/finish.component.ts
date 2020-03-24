@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {BonitaSession} from "../../models/bonita-session";
 import {Utilities} from "../../utilities/utilities";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-finish',
@@ -10,12 +11,22 @@ import {Utilities} from "../../utilities/utilities";
 export class FinishComponent implements OnInit {
 
   public session: BonitaSession;
+  public request: any;
+  public amount: string;
 
-  constructor(private utilities: Utilities) {
+  constructor(private utilities: Utilities,
+              private router: Router) {
   }
 
   ngOnInit(): void {
     this.session = this.utilities.getFromSession('session');
+    this.request = this.utilities.getFromSession('request');
+    this.amount = this.request.amount.toLocaleString();
+  }
+
+  public closeSession() {
+    sessionStorage.removeItem('session');
+    this.router.navigate(['/']);
   }
 
 }
