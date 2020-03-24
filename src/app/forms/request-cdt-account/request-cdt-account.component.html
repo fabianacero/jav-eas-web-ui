@@ -33,12 +33,13 @@
 
       <div class="forms__form--terms">
         <input *ngIf="acceptCdt" name="accept" id="accept" type="checkbox" [(ngModel)]="model.accept">
-        <div>Aceptas las condiciones para solicitar la creación del CDT - Digital</div>
+        <div *ngIf="acceptCdt">Aceptas las condiciones para solicitar la creación del CDT - Digital</div>
       </div>
 
       <div class="forms__button" [class.forms__button--accept]="model.accept">
         <button id="cdt-button" type="submit" class="button" [disabled]="!cdtForm.valid">
-          <span *ngIf="!model.accept">Rechazar Creación de CDT</span>
+          <span *ngIf="!acceptCdt">Solicita tu CDT</span>
+          <span *ngIf="!model.accept && acceptCdt">Rechazar Creación de CDT</span>
           <span *ngIf="model.accept">Solicitar Creación de CDT</span>
         </button>
       </div>
