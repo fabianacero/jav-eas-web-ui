@@ -63,7 +63,7 @@ export class ContactClientComponent implements OnInit {
           email: form.value.email,
           identificationCustomer: {
             identificationNumber: form.value.identification,
-            persistenceId_string: '126'
+            persistenceId_string: '6'
           }
         },
         cdtConditionsInput: {

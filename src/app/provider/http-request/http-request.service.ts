@@ -25,7 +25,8 @@ export class HttpRequestService {
   constructor(private http: HttpClient) {
   }
 
-  request(url: string, params: any, method: string = HttpMethod.POST, aditionalOptions?: { additionalHeaders: { Cookie: string; 'bonita.tenant': string; 'X-Bonita-API-Token': string } }): Observable<any> {
+  //request(url: string, params: any, method: string = HttpMethod.POST, aditionalOptions?: { additionalHeaders: { Cookie: string; 'bonita.tenant': string; 'X-Bonita-API-Token': string } }): Observable<any> {
+  request(url: string, params: any, method: string = HttpMethod.POST, aditionalOptions?): Observable<any> {
     let options = {};
     const body = JSON.stringify(params);
     let result: Observable<any>;

@@ -81,7 +81,7 @@ export class CreateCdtAccountComponent implements OnInit {
           lastName: form.value.lastName,
           identificationCustomer: {
             identificationNumber: form.value.identification,
-            persistenceId_string: '126'
+            persistenceId_string: '6'
           }
         },
         cdtConditionsInput: {

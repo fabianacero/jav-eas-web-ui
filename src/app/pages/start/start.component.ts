@@ -14,7 +14,7 @@ import {TasksNames} from "../../enums/tasks-names.enum";
   styleUrls: ['./start.component.scss']
 })
 export class StartComponent implements OnInit {
-  private session: BonitaSession;
+  public session: BonitaSession;
   private humanTasks: ZgwnuBonitaHumanTask[];
 
   constructor(private httpRequest: HttpRequestService,
@@ -61,7 +61,7 @@ export class StartComponent implements OnInit {
 
   public executeTask(taskId, callback) {
     const endpoint = `/bonita/API/bpm/userTask/${taskId}/execution`;
-    const identificationNumber = this.session.customeInfo.IdentificationNumber;
+    const identificationNumber = this.session.customeInfo["IdentificationNumber"];
     const params = {
       ticket_comment: 'User execution',
       identificationNumberInput: identificationNumber
@@ -84,7 +84,9 @@ export class StartComponent implements OnInit {
         humanTasks => {
           this.humanTasks = humanTasks;
         },
-        errorResponse => this.errorResponse = errorResponse
+        errorResponse => {
+          console.error(errorResponse);
+        }
       );
   }
 

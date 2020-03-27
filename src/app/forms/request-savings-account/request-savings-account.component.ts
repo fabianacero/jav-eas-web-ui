@@ -65,7 +65,7 @@ export class RequestSavingsAccountComponent implements OnInit {
           id: form.value.id,
           productType: this.model.productType,
           identification: {
-            persistenceId_string: '88',
+            persistenceId_string: '6',
             identification: 1,
             identificationNumber: form.value.identification
           }
