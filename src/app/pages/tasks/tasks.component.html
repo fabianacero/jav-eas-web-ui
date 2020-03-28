@@ -7,7 +7,13 @@
     <div *ngFor="let userProcess of userProcess;" class="tasks__process">{{userProcess.displayName}}</div>
   </div>
 
-  <span class="tasks__subtitle tasks__yourtask">Tus tareas:</span>
+  <span class="tasks__subtitle tasks__yourtask">
+    <div>Tus tareas:</div>
+    <div (click)="searchTasks();">
+      <i class="material-icons">autorenew</i>
+    </div>
+    <div *ngIf="showLoading">Loading...</div>
+  </span>
   <div *ngIf="humanTasks" class="tasks__cards">
     <div *ngFor="let humanTask of humanTasks;" class="tasks__card" (click)="takeTask(session.user_id, humanTask);">
       <div><i class="material-icons">&#xE87C;</i></div>

@@ -24,6 +24,7 @@ export class TasksComponent implements OnInit {
   public humanTasks: ZgwnuBonitaHumanTask[];
   public userProcess = new Array();
   public processNames = new Array();
+  public showLoading = false;
 
   constructor(
     private task: ZgwnuBonitaBpmTaskService,
@@ -47,6 +48,7 @@ export class TasksComponent implements OnInit {
   }
 
   private searchTasks() {
+    this.showLoading = true;
     const searchParams: ZgwnuBonitaSearchParms = new ZgwnuBonitaSearchParms(0, 50);
     searchParams.filters = [
       `user_id=${this.session.user_id}`
@@ -56,6 +58,7 @@ export class TasksComponent implements OnInit {
       .subscribe(
         humanTasks => {
           this.humanTasks = humanTasks;
+          this.showLoading = false;
         },
         errorResponse => this.errorResponse = errorResponse
       );

@@ -1,5 +1,6 @@
 <app-header [showCloseButton]="true" [headerInfo]="session"></app-header>
-<div class="start__container">
+<div *ngIf="showLoader" class="loader">Loading...</div>
+<div *ngIf="!showLoader" class="start__container">
   <div class="forms__container">
 
     <div class="ctn-banner__title-animated">

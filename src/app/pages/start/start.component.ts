@@ -16,6 +16,7 @@ import {TasksNames} from "../../enums/tasks-names.enum";
 export class StartComponent implements OnInit {
   public session: BonitaSession;
   private humanTasks: ZgwnuBonitaHumanTask[];
+  public showLoader = false;
 
   constructor(private httpRequest: HttpRequestService,
               private utilities: Utilities,
@@ -36,7 +37,7 @@ export class StartComponent implements OnInit {
       const taskId = this.humanTasks[0]["id"];
       this.startTask(this.session.user_id, taskId);
     } else {
-      console.error("No task obtained!");
+      console.info("No task obtained!");
     }
   }
 
@@ -52,7 +53,8 @@ export class StartComponent implements OnInit {
     }).subscribe((response) => {
       this.executeTask(taskId, (execution) => {
         sessionStorage.removeItem(TasksNames.BEGIN);
-        setTimeout(() => { // Temporal test
+        setTimeout(() => {
+          this.showLoader = false;
           this.router.navigate(['/task']);
         }, 2000);
       });
@@ -66,6 +68,7 @@ export class StartComponent implements OnInit {
       ticket_comment: 'User execution',
       identificationNumberInput: identificationNumber
     };
+    this.showLoader = true;
     this.httpRequest.request(endpoint, params, HttpMethod.POST, {
       additionalHeaders: {'X-Bonita-API-Token': this.session.token}
     }).subscribe((response) => {
